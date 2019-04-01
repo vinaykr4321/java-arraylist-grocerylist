@@ -7,7 +7,7 @@ public class Main {
     private static GroceryList groceryList = new GroceryList();
     public static void main(String[] args) {
         boolean quit = false;
-        int choice = 0;
+        int choice;
         printInstructions();
         while(!quit){
             System.out.println("Enter Your choice");
@@ -40,7 +40,7 @@ public class Main {
         }
     }
 
-    public static void printInstructions(){
+    private static void printInstructions(){
         System.out.println("\nPress : ");
         System.out.println("\t 0 - To print choice options.");
         System.out.println("\t 1 - To print the list of grocery items.");
@@ -51,31 +51,29 @@ public class Main {
         System.out.println("\t 6 - To quit the application.");
     }
 
-    public static void addItem(){
+    private static void addItem(){
         System.out.print("Please enter the Grocery item: ");
         groceryList.addGroceryItem(scanner.nextLine());
     }
 
-    public static void modifyItem(){
-        System.out.print("Enter item number: ");
-        int itemNo = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Enter replacement item: ");
+    private static void modifyItem(){
+        System.out.print("Enter item name which you want to modify: ");
+        String itemNo = scanner.nextLine();
+        System.out.println("Enter replacement item name: ");
         String newItem = scanner.nextLine();
-        groceryList.modifyGroceryList((itemNo-1),newItem);
+        groceryList.modifyGroceryList(itemNo,newItem);
     }
 
-    public static void removeItem(){
+    private static void removeItem(){
         System.out.print("Enter item number: ");
-        int itemNo = scanner.nextInt();
-        scanner.nextLine();
-        groceryList.removeGroceryItem(itemNo-1);
+        String itemNo = scanner.nextLine();
+        groceryList.removeGroceryItem(itemNo);
     }
 
-    public static void searchForItem(){
+    private static void searchForItem(){
         System.out.println("Item to search for: ");
         String searchItem = scanner.nextLine();
-        if (groceryList.findItem(searchItem) != null){
+        if (groceryList.onFile(searchItem)){
             System.out.println("Found " + searchItem + " in our grocery list.");
         }else{
             System.out.println(searchItem + " is not in the grocery lsit");
